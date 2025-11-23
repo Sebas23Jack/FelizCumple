@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Viaje - Para Mi Amor</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px 20px;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .timeline-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ef4444, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .timeline-header p {
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ef4444, #ec4899, #f43f5e);
+        }
+
+        .timeline-event {
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .timeline-event:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-event:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-event:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-event:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-event:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-event:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-event:nth-child(odd) {
+            padding-right: calc(50% + 40px);
+            text-align: right;
+        }
+
+        .timeline-event:nth-child(even) {
+            padding-left: calc(50% + 40px);
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid #ef4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            top: 0;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+
+        .timeline-event:nth-child(even) .timeline-dot {
+            border-color: #ec4899;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #fce7f3;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            transform: translateY(-5px);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ef4444;
+            margin-bottom: 8px;
+        }
+
+        .timeline-event:nth-child(even) .timeline-date {
+            color: #ec4899;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .timeline-ending {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            border: 3px solid #fce7f3;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-ending h2 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ef4444, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .timeline-ending p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .timeline-hearts {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-event:nth-child(odd),
+            .timeline-event:nth-child(even) {
+                padding-left: 100px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-header h1 {
+                font-size: 2rem;
+            }
+
+            .timeline-ending h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="heart-icon">❤️</span>
+                <span>Para Mi Amor</span>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li><a href="viaje.html" class="nav-link active">Nuestro Viaje</a></li>
+                <li><a href="mensajes.html" class="nav-link">Mensajes</a></li>
+                <li><a href="deseos.html" class="nav-link">Deseos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="timeline-container">
+        <div class="timeline-header">
+            <h1>Nuestro Viaje</h1>
+            <p>La historia de nuestro amor, momento a momento, día a día.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-event">
+                <div class="timeline-dot">💫</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Hace 2 años</div>
+                    <h3>Nuestro Primer Encuentro</h3>
+                    <p>El día que todo comenzó. Nuestras miradas se cruzaron y supe que eras especial.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-dot">💋</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Pecando Por Amor</div>
+                    <h3>Primer Beso</h3>
+                    <p>Un momento mágico que selló el comienzo de nuestro hermoso viaje juntos. Unas palabras y un beso que prendio una inmensa llama de amor por ti.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-dot">✈️</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Un futuro proximo</div>
+                    <h3>Viaje Especial</h3>
+                    <p>Exploremos nuevos lugares y creames recuerdos inolvidables juntos.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-dot">💍</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Promesa</div>
+                    <h3>La Primera Promesa de Amor</h3>
+                    <p>Te prometí que siempre estaré a tu lado y cuidarte, en todo momento.</p>
+                </div>
+            </div>
+
+            <div class="timeline-event">
+                <div class="timeline-dot">🎂</div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Hoy</div>
+                    <h3>Tu Cumpleaños</h3>
+                    <p>Celebrando el día en que naciste, el día que mi mundo se iluminó.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-ending">
+            <h2>Y el viaje continúa...</h2>
+            <p>Cada día contigo es un nuevo capítulo en nuestra historia de amor. Espero que este viaje sea eterno y que podamos crear infinitos momentos más juntos.</p>
+            <div class="timeline-hearts">
+                <span>❤️</span>
+                <span>💗</span>
+                <span>🌹</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>❤️ Para Mi Amor</h3>
+                <p>El lenguaje de programacion inspirado en tu amor.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="galeria.html">Galería</a></li>
+                    <li><a href="viaje.html">Nuestro Viaje</a></li>
+                    <li><a href="mensajes.html">Mensajes</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📧 jhonnatanporras23@gmail.com</p>
+                <p>📱 +(593) 984026364</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Hecho con ❤️ para ti</p>
+            <p>&copy; 2024 Para Mi Mary. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
